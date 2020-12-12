@@ -1,3 +1,12 @@
 @page "/page/login"
 
-<Login />
+<AuthorizeView>
+    <Authorized>
+        You Are Signed In
+    </Authorized>
+    <NotAuthorized>
+        Blazor Wasm Application
+        <AuthLogin />
+    </NotAuthorized>
+</AuthorizeView>
+

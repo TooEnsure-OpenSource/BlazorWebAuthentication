@@ -1,19 +1,49 @@
 @inherits LayoutComponentBase
-@* 
-<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
- *@
+
+@inject Blazored.LocalStorage.ILocalStorageService LocalStore;
+@inject AuthenticationStateProvider AuthState;
+@inject NavigationManager NavManager;
 <div class="page">
     <div class="main">
-        <div class="top-row px-4">
-            <a href="https://github.com/TooEnsure-OpenSource/BlazorWebAuthentication" target="_blank" class="">
-                <img style="height:100%; width:15rem;" src="img/logo.png" alt="">
-            </a>
-        </div>
 
+        <div class="top-row">
+            <div class="d-flex align-items-center bd-highlight mb-3">
+                <div class="p-2 mr-auto">
+                    <div class="p-2 bd-highlight">
+                        <a href="https://github.com/TooEnsure-OpenSource/BlazorWebAuthentication" target="_blank" class="">
+                            <img style="height:100%; width:15rem;" src="img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-2">
+                    <AuthorizeView>
+                        <Authorized>
+                            <NavLink @onclick="Logout">
+                                <span class="oi oi-account-logout pr-2"></span>Logout
+                            </NavLink>
+                        </Authorized>
+                        <NotAuthorized>
+                            <NavLink href="">LogIn</NavLink>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+        
         <div class="content px-4">
             @Body
         </div>
     </div>
 </div>
+
+
+@code {
+
+    private async void Logout()
+    {
+        await LocalStore.RemoveItemAsync("isAuth");
+        await AuthState.GetAuthenticationStateAsync();
+        NavManager.NavigateTo("/");
+    }
+}
