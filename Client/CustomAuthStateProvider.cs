@@ -21,7 +21,7 @@ namespace Client
                 var identity = new ClaimsIdentity(
                 new[]
                 {
-                    new Claim(ClaimTypes.Name, "ShawnDoe")
+                    new Claim(ClaimTypes.Name, "Admin")
                 }, "test authentication type");
 
                 var user = new ClaimsPrincipal(identity);
