@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+<section class="container">
+    <div class="row">
+        <div class="col-3">
+            <a href="@Twitter">Twitter</a>
+        </div>
+        <div class="col-3">
+            <a href="@GitHub">GitHub</a>
+        </div>
+        <div class="col-3">
+            <a href="@Discord">Discord</a>
+        </div>
+        <div class="col-3">
+            <a href="@Patreon">Patreon</a>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    [Parameter] public string Twitter { get; set; }
+    [Parameter] public string GitHub { get; set; }
+    [Parameter] public string Discord { get; set; }
+    [Parameter] public string Patreon { get; set; }
+
+}
